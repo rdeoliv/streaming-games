@@ -32,13 +32,14 @@ locals {
         cloud_provider = "AWS"
         ksqldb_endpoint = "/${aws_api_gateway_stage.event_handler_v1.stage_name}${aws_api_gateway_resource.event_handler_resource.path}"
         games_list =jsonencode(var.games_list)
+        ably_key = jsonencode(var.ably_key)
     })
 
   # Nested loop over both lists, and flatten the result.
   game_files_to_upload = distinct(flatten([
     for game_module_key, game_module in module.template_files_game : [
       //game = game_module.key
-    
+
       for game_files_key, game_files in game_module.files : {
         //game = game_module_key
         //game_files    = game_files
@@ -54,14 +55,14 @@ locals {
 
  /* game_files_to_upload = distinct(flatten([
     for game_module_key in keys(module.template_files_game) : [
-    
+
       for game_files_keys in keys(module.template_files_game[game_module_key].files) : {
         game = game_module_key
         file_key    = module.template_files_game[game_module_key].files[game_files_keys]
       }
     ]
   ]))*/
-} 
+}
 
 /* UPLOAD ONLY SELECTED GAMES*/
 
@@ -109,4 +110,3 @@ resource "aws_s3_object" "env_vars_js" {
   content = local.env_vars_js
   etag  = md5(local.env_vars_js)
 }
-

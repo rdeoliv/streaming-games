@@ -37,6 +37,17 @@ output "confluent_ksql_cluster_api_secret" {
     sensitive = true
 }
 
+output "confluent_cluster_api_key" {
+    value = confluent_api_key.app-manager-kafka-api-key.id
+    sensitive = true
+}
+
+output "confluent_cluster_api_secret" {
+    value = confluent_api_key.app-manager-kafka-api-key.secret
+    sensitive = true
+}
+
+
 ###########################################
 ############### AWS Outputs ###############
 ###########################################

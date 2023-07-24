@@ -15,6 +15,7 @@
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0, maximum-scale=1, user-scalable=no, minimal-ui">
+
 </head>
 <body>
   <div class="container">
@@ -83,25 +84,25 @@
    <p>
     <strong class="important">Note:</strong> This game is the powered by <a href="https://confluent.cloud/" target="_blank">Confluent Cloud</a>. You can recreate this demo following  <a href="https://gianlucanatali.github.io/streaming-games/index.html" target="_blank">self-paced workshop</a>.
     </p>
-     
+
     <hr>
     <p class="game-signature">
     Demo by <a href="https://www.linkedin.com/in/gianlucanatali/" target="_blank">Gianluca Natali.</a> Based on <a href="https://github.com/gabrielecirulli/2048" target="_blank">2048 by Gabriele Cirulli</a>.</a>
     </p>
   </div>
-
+  <script src="https://cdn.ably.com/lib/ably.min-1.js"></script>
+  <script src="js/animframe_polyfill.js"></script>
+  <script src="js/application.js"></script>
   <script src="js/bind_polyfill.js"></script>
   <script src="js/classlist_polyfill.js"></script>
-  <script src="js/animframe_polyfill.js"></script>
-  <script src="js/keyboard_input_manager.js"></script>
+  <script src="js/game_manager.js"></script>
   <script src="js/html_actuator.js"></script>
+  <script src="js/keyboard_input_manager.js"></script>
   <script src="js/grid.js"></script>
   <script src="js/tile.js"></script>
   <script src="../js/env-vars.js"></script>
   <script src="../js/local_storage_manager.js"></script>
   <script src="../js/shared.js"></script>
   <script src="../js/scoreboard.js"></script>
-  <script src="js/game_manager.js"></script>
-  <script src="js/application.js"></script>
 </body>
 </html>

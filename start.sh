@@ -14,6 +14,8 @@ export EXAMPLE="streaming-games"
 
 function init_vars_from_tf_output() {
     ENVIRONMENT_ID=$(terraform output -json -state=${STATE_FILE_PATH} | jq ".environment_id.value" -r)
+    KAFKA_CLUSTER_API_KEY=$(terraform output -json -state=${STATE_FILE_PATH} | jq ".confluent_cluster_api_key.value" -r)
+    KAFKA_CLUSTER_API_SECRET=$(terraform output -json -state=${STATE_FILE_PATH} | jq ".confluent_cluster_api_secret.value" -r)
     KAFKA_CLUSTER_ID=$(terraform output -json -state=${STATE_FILE_PATH} | jq ".confluent_kafka_cluster_id.value" -r)
     KSQLDB_CLUSTER_ID=$(terraform output -json -state=${STATE_FILE_PATH} | jq ".confluent_ksql_cluster_id.value" -r)
     KSQLDB_ENDPOINT=$(terraform output -json -state=${STATE_FILE_PATH} | jq ".confluent_ksql_cluster_api_endpoint.value" -r)
@@ -21,7 +23,7 @@ function init_vars_from_tf_output() {
     KSQLDB_CLUSTER_API_KEY=$(terraform output -json -state=${STATE_FILE_PATH} | jq ".confluent_ksql_cluster_api_key.value" -r)
     KSQLDB_CLUSTER_API_SECRET=$(terraform output -json -state=${STATE_FILE_PATH} | jq ".confluent_ksql_cluster_api_secret.value" -r)
     GAMES_URL=$(terraform output -json -state=${STATE_FILE_PATH} | jq ".Games.value" -r)
-    
+
 
 }
 
@@ -29,7 +31,7 @@ function create_infra_with_tf (){
 
     # DELTA_CONFIGS_DIR=delta_configs
     # source $DELTA_CONFIGS_DIR/env.delta
-    
+
     # create_tfvars_file
     cd $TFS_PATH
     terraform init
@@ -72,7 +74,7 @@ function create_ksqldb_app {
     echo "Waiting up to $MAX_WAIT seconds for Confluent Cloud ksqlDB cluster $KSQLDB_ENDPOINT to be UP"
 
     confluent environment use $ENVIRONMENT_ID
-    
+
     #retry $MAX_WAIT ccloud::validate_ccloud_ksqldb_endpoint_ready $KSQLDB_ENDPOINT || exit 1
 
     #################################################################
@@ -96,11 +98,11 @@ function start_demo {
 
     echo "run_as_workshop=$run_as_workshop"
 
-    source $UTILS_DIR/demo_helper.sh 
+    source $UTILS_DIR/demo_helper.sh
 
-    validate_pre_reqs 
+    validate_pre_reqs
 
-    ccloud::prompt_continue_ccloud_demo || exit 1 
+    ccloud::prompt_continue_ccloud_demo || exit 1
 
     # Build Lambda Function with Maven
     cd $TFS_PATH/functions
@@ -147,15 +149,17 @@ function welcome_screen {
     echo " ██      ██    ██ ██ ██  ██ █████   ██      ██    ██ █████   ██ ██  ██    ██        ";
     echo " ██      ██    ██ ██  ██ ██ ██      ██      ██    ██ ██      ██  ██ ██    ██        ";
     echo "  ██████  ██████  ██   ████ ██      ███████  ██████  ███████ ██   ████    ██        ";
-    echo "                                                                                    ";                                                                                    
+    echo "                                                                                    ";
     echo " ";
     echo " ";
-    echo " ";                                                                   
+    echo " ";
     echo "**************************************************************************************************";
-    echo 
-    echo 
+    echo
+    echo
     echo "Handy links: "
     echo " - PLAY HERE --> ${GAMES_URL} ";
+    echo "Created Kafka API KEY --> ${KAFKA_CLUSTER_API_KEY}";
+    echo "Created Kafka API KEY secret --> ${KAFKA_CLUSTER_API_SECRET}";
     echo
     echo "Cloud resources are provisioned and accruing charges. To destroy this demo and associated resources run ->"
     echo "    ./stop.sh"

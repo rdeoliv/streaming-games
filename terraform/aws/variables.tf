@@ -55,3 +55,8 @@ variable "games_list" {
   type = set(string)
   default = ["2048"]
 }
+
+variable "ably_key" {
+  type = string
+  default = ""
+}
