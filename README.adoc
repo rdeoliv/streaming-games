@@ -112,7 +112,7 @@ cp config/demo.cfg.example config/demo.cfg
 export TF_VAR_aws_profile="<AWS_PROFILE>"
 export TF_VAR_aws_region="eu-west-2"
 export TF_VAR_schema_registry_region="eu-central-1"
-export TF_VAR_confluent_cloud_api_key=="<CONFLUENT_CLOUD_API_KEY>"
+export TF_VAR_confluent_cloud_api_key="<CONFLUENT_CLOUD_API_KEY>"
 export TF_VAR_confluent_cloud_api_secret="<CONFLUENT_CLOUD_API_SECRET>"
 export TF_VAR_ably_key="<ABLY_API_KEY>"
 ----
