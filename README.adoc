@@ -11,16 +11,16 @@ To implement streaming analytics in the game we built a  link:statements.sql[sco
 == What you are going to need?
 
 * *Java and Maven* - The UI layer of the application relies on two APIs that are implemented using https://openjdk.java.net/[Java], therefore you will need to have Java 11+ installed to build the source-code. The build itseld is implemented using https://maven.apache.org/[Maven], and it is triggered automatically by Terraform.
-* Install jq on your local computer
+* *Install jq on your local computer
 * *Confluent Cloud CLI* - During the demo setup, a bash script will set up the whole Confluent Cloud environment for you. To do that it will need to have the Confluent Cloud CLI installed locally. You can find instructions about how to install it https://docs.confluent.io/current/cloud/cli/index.html[here]. v1.7.0 or later is required, logged in with the ``--save`` argument which saves your Confluent Cloud user login credentials or refresh token (in the case of SSO) to the local ``netrc`` file.
 * *Confluent Cloud account* - If you do not have a Confluent Cloud account, you can create it with instructions below.
 * *Terraform (0.14+)* - The application is automatically created using https://www.terraform.io[Terraform]. Besides having Terraform installed locally, will need to provide your cloud provider credentials so Terraform can create and manage the resources for you.
 * *AWS account* - This demo/Workshop runs on AWS
 * *Ably account* - Ably is the serverless Edge PubSub platform sitting between the front-end and Confluent Cloud.
 
+////
 == Workshop or Demo?
 Choose your story! If you prefer to follow the different steps in a workshop style follow the instructions https://gianlucanatali.github.io/streaming-games/index.html[here]. Otherwise for a more traditional demo keep reading below!
-
 
 == Pre-requisites
 
@@ -28,6 +28,8 @@ Choose your story! If you prefer to follow the different steps in a workshop sty
 ====
 Follow this part carefully before the demo/workshop!
 ====
+////
+
 
 === Step 1. Install workshop dependencies
 
@@ -80,7 +82,7 @@ You can create a free-forever Ably account http://ably.com/sign-up[here].
 3. Give it a name and make sure that only *Publish* is ticked
 4. A new key has now been created. We will use it shortly (Step 5).
 
-== Step 4. Clone this repo
+=== Step 4. Clone this repo
 First things first, clone this github repo to your local machine (Use your Terminal):
 
 [source,bash]
@@ -88,11 +90,11 @@ First things first, clone this github repo to your local machine (Use your Termi
 git clone https://github.com/rdeoliv/streaming-games.git
 ----
 
-== Step 5. Configure the deployment
+=== Step 5. Configure the deployment
 
 The whole workshop creation is scripted. The script will leverage Terraform to:
-* As mentioned before the application uses a Kafka cluster running in a fully managed service for Apache Kafka. Therefore the first thing it will provision is Confluent Cloud resources using the Confluent Cloud CLI. If you are interested in how you can create a cluster in Confluent Cloud via the Web UI have a look at our https://docs.confluent.io/current/quickstart/cloud-quickstart/index.html[Quick Start for Apache Kafka using Confluent Cloud].
-* Spin up the other resources needed in AWS (Cloudfront distribution and S3)
+* *As mentioned before the application uses a Kafka cluster running in a fully managed service for Apache Kafka. Therefore the first thing it will provision is Confluent Cloud resources using the Confluent Cloud CLI. If you are interested in how you can create a cluster in Confluent Cloud via the Web UI have a look at our https://docs.confluent.io/current/quickstart/cloud-quickstart/index.html[Quick Start for Apache Kafka using Confluent Cloud].
+* *Spin up the other resources needed in AWS (Cloudfront distribution and S3)
 
 Run the following steps to configure the workshop
 
@@ -128,11 +130,11 @@ aws_secret_access_key=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
 ----
 You can set ``TF_VAR_aws_profile="default"`` in the ``demo.cfg`` file
 
-== Step 6. Deploying the application
+=== Step 6. Deploying the application
 
 The application is essentially a set of link:https://github.com/gianlucanatali/demo-scene/tree/master/streaming-games/games/2048[HTML/CSS/JS files] that forms a microsite that can be hosted statically anywhere. But for the sake of coolness we will deploy this microsite in a S3 bucket from AWS. This bucket will be created in the same region selected for the Confluent Cloud cluster to ensure that the application will be co-located. The application will emit events that will be processed by a event handler implemented as an API Gateway which uses a Lambda function as backend. This event handler API receives the events and writes them into Kafka using ksqlDB.
 
-image::arch.png[align="left"]
+image::2048-Ably-confluent.png[align="left"]
 
 Please note that during deployment, the script takes care of creating the required Kafka topics and also the ksqlDB queries. Therefore, there is no need to manually create them.
 
@@ -157,7 +159,7 @@ Bootstrap endpoint -->
 ----
 +
 
-== Step 7. Configure the Ably native integration while waiting for the content to be available
+=== Step 7. Configure the Ably native integration while waiting for the content to be available
 
 > **Note**
 > It will take a bit of time for the content to be available via cloudfront. If accessing the link returned by the script you see an error message like the one below, don't worry: just give it some more minutes and try the link again. Make sure you are not hitting refresh, as cloudfront might have sent you to a different url. It can take up to 1hr for the cloudfront distribution to be available.
@@ -167,7 +169,7 @@ image::error-cloud-front.png[]
 You can try to speed up this process using the trick explained in this medium article: https://medium.com/the-scale-factory/is-your-cloudfront-distribution-stuck-in-progress-7e3aead1337b[Is your CloudFront distribution stuck “in progress”?]
 In the meantime, let's define the streaming integration.
 
-=== Step 7.a
+==== Step 7a. Pushing game data to Kafka
 
 1. In your Ably app, go to the *Integrations* tab and click on *New Integration Rule*
 2. Select Firehose and choose Kafka as target service
@@ -178,7 +180,7 @@ In the meantime, let's define the streaming integration.
 7. Underneath those Confluent Cloud Credentials in the terraform output, you will also find the Broker Endpoint
 8. Once all filled-in, click on *Create*. The new rule is now created, go ahead and test it using the *Test rule* button.
 
-=== Step 7.b
+==== Step 7.b Pushing player data to Kafka
 
 Repeat the above steps and create a new Kafka integration with the channel filter set to ``losses-events`` and the Routing Key to ``USER_LOSSES``.
 
@@ -264,12 +266,11 @@ GROUP BY
   UG.USER_KEY;
 ----
 
+=== Step 9. Share your game with your colleagues, friends and see who gets the best score in realtime
 
+=== Step 10. Destroy the resources (save money!)
 
-== Step 9. Destroy the resources (save money!)
-
-The great thing about Cloud resources is that you can spin the up and down with few commands. Once you are finished with this worksho/demo , remember to destroy the resources you created today, to avoid incuring in charges if you are not planning to use this. You can always spin it up again anytime you want (uncomment the run_as_workshop variable in the config file if you want to automate the creation of ksqlDB queries, so you can demo the app without any manual effort)!
-
+The great thing about Cloud resources is that you can spin the up and down with few commands. Once you are finished with this workshop, remember to destroy the resources you created today, to avoid incurring in charges if you are not planning to use this. You can always spin it up again anytime you want.
 
 *Note:* When you are done with the application, you can automatically destroy all the resources created using the command below:
 
@@ -281,7 +282,6 @@ The great thing about Cloud resources is that you can spin the up and down with 
 
 
 == Troubleshooting
-
 
 
 == License
