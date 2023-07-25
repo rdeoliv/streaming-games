@@ -207,7 +207,7 @@ image::scoreboard.png[]
 
 To build a scoreboard out of this, we created a streaming analytics pipeline that transform these raw events into a table with the scoreboard that is updated in near real-time.
 
-image::pipeline.png[]
+image::pipeline-2.png[]
 
 ksqlDB supports link:https://docs.ksqldb.io/en/0.14.0-ksqldb/concepts/queries/pull/[Pull queries], where you can get the results for a query in a more traditional fashion (instead of Push queries).
 
@@ -233,7 +233,7 @@ Let's create a table to count the number of losses for each player.
 
 [source,sql]
 ----
-CREATE TABLE LOSSES_PER_USER AS
+CREATE TABLE LOSSES_PER_USER WITH (KEY_FORMAT='JSON') AS
 SELECT
   USER_KEY,
   USER_KEY -> USER AS USER,
@@ -249,7 +249,7 @@ GROUP BY
 
 [source,sql]
 ----
-CREATE TABLE STATS_PER_USER AS
+CREATE TABLE STATS_PER_USER WITH (KEY_FORMAT='JSON') AS
 SELECT
   UG.USER_KEY AS USER_KEY,
   UG.USER_KEY -> USER AS USER,
