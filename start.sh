@@ -150,13 +150,19 @@ function welcome_screen {
     echo " ██      ██    ██ ██  ██ ██ ██      ██      ██    ██ ██      ██  ██ ██    ██        ";
     echo "  ██████  ██████  ██   ████ ██      ███████  ██████  ███████ ██   ████    ██        ";
     echo "                                                                                    ";
+    echo "                                                                                    ";
+    echo "          █████  ██████  ██     ██    ██      █████  ██      ██ ███████             ";
+    echo "         ██   ██ ██   ██ ██      ██  ██      ██   ██ ██  ██  ██ ██                  ";
+    echo "         ███████ ██████  ██        ██        ███████ ██ ████ ██ ███████             ";
+    echo "         ██   ██ ██   ██ ██        ██        ██   ██ ████  ████      ██             ";
+    echo "         ██   ██ ██████  ███████   ██        ██   ██ ███    ███ ███████             ";
     echo " ";
     echo " ";
     echo " ";
     echo "**************************************************************************************************";
     echo
     echo
-    echo "Handy links: "
+    echo "Handy link and Confluent Key info: "
     echo " - PLAY HERE --> ${GAMES_URL} ";
     echo "Created Kafka API KEY --> ${KAFKA_CLUSTER_API_KEY}";
     echo "Created Kafka API KEY secret --> ${KAFKA_CLUSTER_API_SECRET}";
