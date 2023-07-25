@@ -17,6 +17,7 @@ function init_vars_from_tf_output() {
     KAFKA_CLUSTER_API_KEY=$(terraform output -json -state=${STATE_FILE_PATH} | jq ".confluent_cluster_api_key.value" -r)
     KAFKA_CLUSTER_API_SECRET=$(terraform output -json -state=${STATE_FILE_PATH} | jq ".confluent_cluster_api_secret.value" -r)
     KAFKA_CLUSTER_ID=$(terraform output -json -state=${STATE_FILE_PATH} | jq ".confluent_kafka_cluster_id.value" -r)
+    KAFKA_CLUSTER_REST_ENDPOINT=$(terraform output -json -state=${STATE_FILE_PATH} | jq ".confluent_ksql_cluster.main.rest_endpoint" -r)
     KSQLDB_CLUSTER_ID=$(terraform output -json -state=${STATE_FILE_PATH} | jq ".confluent_ksql_cluster_id.value" -r)
     KSQLDB_ENDPOINT=$(terraform output -json -state=${STATE_FILE_PATH} | jq ".confluent_ksql_cluster_api_endpoint.value" -r)
     KSQLDB_CLUSTER_SERVICE_ACCOUNT_ID=$(terraform output -json -state=${STATE_FILE_PATH} | jq ".confluent_ksql_cluster_service_account_id.value" -r)
@@ -162,10 +163,11 @@ function welcome_screen {
     echo "**************************************************************************************************";
     echo
     echo
-    echo "Handy link and Confluent Key info: "
+    echo "Handy link and Confluent info: "
     echo " - PLAY HERE --> ${GAMES_URL} ";
     echo "Created Kafka API KEY --> ${KAFKA_CLUSTER_API_KEY}";
     echo "Created Kafka API KEY secret --> ${KAFKA_CLUSTER_API_SECRET}";
+    echo "Bootstrap endpoint --> ${KAFKA_CLUSTER_REST_ENDPOINT}";
     echo
     echo "Cloud resources are provisioned and accruing charges. To destroy this demo and associated resources run ->"
     echo "    ./stop.sh"
