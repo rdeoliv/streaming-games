@@ -177,7 +177,10 @@ In the meantime, let's define the streaming integration.
 3. Set *Channel Filter* to ``game-events``
 4. Encoding should be ``JSON`` and each message should *NOT* be enveloped
 5. Set the Kafka Routing Key to ``USER_GAME``
-6. Set the Authentication mechanism to SASL/PLAIN and copy paste the Confluent Cloud credentials from the end of Step 6
+6. Set the Authentication mechanism to SASL/PLAIN and copy paste the Confluent Cloud credentials from the terminal outputs as seen below
+
+image::terraform-output.png
+
 7. Your Confluent Cloud Broker endpoint can be found in your cluster settings in Confluent Cloud and has the following format ``pkc-*****.eu-west-2.aws.confluent.cloud:9092``
 
 image::confluent-bootstrap.png[]
