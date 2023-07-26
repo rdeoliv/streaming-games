@@ -80,7 +80,7 @@ You can create a free-forever Ably account http://ably.com/sign-up[here].
 1. Create a new app and give it a name
 2. Go to *API KEYS* and click on the *Create a new API Key* button
 3. Give it a name and make sure that only *Publish* is ticked
-4. A new key has now been created. We will use it shortly (Step 5).
+4. A new key has now been created. You will need this API key **to use the Confluent Terraform Provider** (Step 5).
 
 === Step 4. Clone this repo
 First things first, clone this github repo to your local machine (Use your Terminal):
@@ -105,7 +105,7 @@ Run the following steps to configure the workshop
 cp config/demo.cfg.example config/demo.cfg
 ----
 +
-2. Provide the required information on the 'demo.cfg' file
+2. Provide the required information on the 'demo.cfg' file adding the Confluent Key, the Ably Publish-only Key and your AWS profile.
 +
 [source,bash]
 ----
@@ -162,7 +162,7 @@ Kafka Cluster endpoint --> https://pksqlc-*****.eu-west-2.aws.confluent.cloud:44
 === Step 7. Configure the Ably native integration while waiting for the content to be available
 
 > **Note**
-> It will take a bit of time for the content to be available via cloudfront. If accessing the link returned by the script you see an error message like the one below, don't worry: just give it some more minutes and try the link again. Make sure you are not hitting refresh, as cloudfront might have sent you to a different url. It can take up to 1hr for the cloudfront distribution to be available.
+> It will take a bit of time for the content to be available via CloudFront. If accessing the link returned by the script you see an error message like the one below, don't worry: just give it some more minutes and try the link again. Make sure you are not hitting refresh, as cloudfront might have sent you to a different url. It can take up to 1hr for the cloudfront distribution to be available.
 
 image::error-cloud-front.png[]
 
@@ -174,10 +174,14 @@ In the meantime, let's define the streaming integration.
 1. In your Ably app, go to the *Integrations* tab and click on *New Integration Rule*
 2. Select Firehose and choose Kafka as target service
 3. Set *Channel Filter* to ``game-events``
-4. Encoding should be ``JSON`` and each message should *NOT* be envelopped
+4. Encoding should be ``JSON`` and each message should *NOT* be enveloped
 5. Set the Kafka Routing Key to ``USER_GAME``
 6. Set the Authentication mechanism to SASL/PLAIN and copy paste the Confluent Cloud credentials from the end of Step 6
-7. Underneath those Confluent Cloud Credentials in the terraform output, you will also find the Bootstrap endpoint which you can use to
+7. Your Confluent Cloud Broker endpoint can be found in your cluster settings in Confluent Cloud and has the following format ``pkc-*****.eu-west-2.aws.confluent.cloud:9092``
+
+image::confluent-bootstrap.png[]
+
+
 8. Once all filled-in, click on *Create*. The new rule is now created, go ahead and test it using the *Test rule* button.
 
 ==== Step 7.b Pushing player data to Kafka
