@@ -46,10 +46,10 @@ confluent-cli
 
 === Step 2. Signup for Confluent Cloud
 
-You can Create a Confluent Cloud Account following this link: https://www.confluent.io/confluent-cloud/tryfree/?utm_campaign=tm.campaigns_cd.Q223_EMEA_AWS-Pacman-Workshop&utm_source=marketo&utm_medium=workshop[Try Confluent Cloud For Free (Games Workshop)]
+You can Create a Confluent Cloud Account following this link: https://www.confluent.io/confluent-cloud/tryfree/?utm_campaign=tm.campaigns_cd.mp-aws%5B%E2%80%A6%5Dmarketplace&utm_source=workshop&utm_medium=aws-immersion-day[Try Confluent Cloud For Free (Games Workshop)]
 
 If you want to create a Confluent Cloud account from the *AWS Marketplace*, follow this link:
-https://www.confluent.io/partner/amazon-web-services/?utm_campaign=tm.campaigns_cd.mp-workshop-pacman-emea-awsmarketplace&utm_medium=marketingemail[Try Confluent Cloud For Free - Sign up from AWS Marketplace (Games Workshop)]
+https://www.confluent.io/partner/amazon-web-services/?utm_campaign=tm.campaigns_cd.mp-aws-immersion-day-awsmarketplace&utm_medium=aws-immersion-day[Try Confluent Cloud For Free - Sign up from AWS Marketplace (Games Workshop)]
 
 ==== Step 2a. Create a Cloud API Key
 
