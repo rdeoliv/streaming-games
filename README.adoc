@@ -94,7 +94,7 @@ git clone https://github.com/rdeoliv/streaming-games.git
 
 The whole workshop creation is scripted. The script will leverage Terraform to:
 * *As mentioned before the application uses a Kafka cluster running in a fully managed service for Apache Kafka. Therefore the first thing it will provision is Confluent Cloud resources using the Confluent Cloud CLI. If you are interested in how you can create a cluster in Confluent Cloud via the Web UI have a look at our https://docs.confluent.io/current/quickstart/cloud-quickstart/index.html[Quick Start for Apache Kafka using Confluent Cloud].
-* *Spin up the other resources needed in AWS (Cloudfront distribution and S3)
+* *Spin up the other resources needed in AWS (CloudFront distribution and S3)
 
 Run the following steps to configure the workshop
 
@@ -162,7 +162,7 @@ Kafka Cluster endpoint --> https://pksqlc-*****.eu-west-2.aws.confluent.cloud:44
 === Step 7. Configure the Ably native integration while waiting for the content to be available
 
 > **Note**
-> It will take a bit of time for the content to be available via CloudFront. If accessing the link returned by the script you see an error message like the one below, don't worry: just give it some more minutes and try the link again. Make sure you are not hitting refresh, as cloudfront might have sent you to a different url. It can take up to 1hr for the cloudfront distribution to be available.
+> It will take a bit of time for the content to be available via CloudFront. If accessing the link returned by the script you see an error message like the one below, don't worry: just give it some more minutes and try the link again. Make sure you are not hitting refresh, as CloudFront might have sent you to a different url. It can take up to 1hr for the CloudFront distribution to be available.
 
 image::error-cloud-front.png[]
 
@@ -189,7 +189,7 @@ image::confluent-bootstrap.png[]
 Repeat the above steps and create a new Kafka integration with the channel filter set to ``losses-events`` and the Routing Key to ``USER_LOSSES``.
 
 Great, you should now have 2 integration rules that will redirect all messages on the Ably channels into the corresponding Kafka Topic.
-You can now check again if your app is available in the Cloudfront distribution.
+You can now check again if your app is available in the CloudFront distribution.
 
 === Step 8. Check the scoreboard
 
