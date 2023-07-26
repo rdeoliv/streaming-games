@@ -155,7 +155,7 @@ Handy link and Confluent info:
  - PLAY HERE --> https://d3q01rwt2f2mo0.cloudfront.net
 Created Kafka API KEY --> BZVXOWRGE*******
 Created Kafka API KEY secret --> CaASeIfQHbZCW4xI1x9*******
-Bootstrap endpoint -->
+Kafka Cluster endpoint --> https://pksqlc-*****.eu-west-2.aws.confluent.cloud:443
 ----
 +
 
@@ -177,7 +177,7 @@ In the meantime, let's define the streaming integration.
 4. Encoding should be ``JSON`` and each message should *NOT* be envelopped
 5. Set the Kafka Routing Key to ``USER_GAME``
 6. Set the Authentication mechanism to SASL/PLAIN and copy paste the Confluent Cloud credentials from the end of Step 6
-7. Underneath those Confluent Cloud Credentials in the terraform output, you will also find the Broker Endpoint
+7. Underneath those Confluent Cloud Credentials in the terraform output, you will also find the Bootstrap endpoint which you can use to
 8. Once all filled-in, click on *Create*. The new rule is now created, go ahead and test it using the *Test rule* button.
 
 ==== Step 7.b Pushing player data to Kafka
