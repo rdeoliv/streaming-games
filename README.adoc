@@ -88,6 +88,7 @@ First things first, clone this github repo to your local machine (Use your Termi
 [source,bash]
 ----
 git clone https://github.com/rdeoliv/streaming-games.git
+cd streaming-games
 ----
 
 === Step 5. Configure the deployment
@@ -126,7 +127,7 @@ The file in ``~/.aws/credentials`` should look like this (An example below)
 ----
 [default]
 aws_access_key_id=AKIAIOSFODNN7EXAMPLE
-aws_secret_access_key=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+aws_secret_access_key=DONTCOPY/THIS/bPxRfiCYEXAMPLEKEY
 ----
 You can set ``TF_VAR_aws_profile="default"`` in the ``demo.cfg`` file
 
