@@ -179,7 +179,7 @@ In the meantime, let's define the streaming integration.
 5. Set the Kafka Routing Key to ``USER_GAME``
 6. Set the Authentication mechanism to SASL/PLAIN and copy paste the Confluent Cloud credentials from the terminal outputs as seen below
 
-image::terraform-output.png
+image::terraform-output.png[]
 
 7. Your Confluent Cloud Broker endpoint can be found in your cluster settings in Confluent Cloud and has the following format ``pkc-*****.eu-west-2.aws.confluent.cloud:9092``
 
@@ -235,6 +235,8 @@ WHERE GAME_NAME='2048';
 === the ksqlDB queries that built this streaming pipeline
 
 To implement the pipeline we will use ksqlDB. Go to your Confluent Cloud Cluster and select ksqDB on the left and click on ``ksql_cluster_0`` to access the database's query editor
+
+image::ksqlDB-cluster.png[]
 
 === LOSSES_PER_USER Table
 Let's create a table to count the number of losses for each player.
