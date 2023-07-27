@@ -234,7 +234,7 @@ WHERE GAME_NAME='2048';
 
 === the ksqlDB queries that built this streaming pipeline
 
-To implement the pipeline we will use ksqlDB.
+To implement the pipeline we will use ksqlDB. Go to your Confluent Cloud Cluster and select ksqDB on the left and click on ``ksql_cluster_0`` to access the database's query editor
 
 === LOSSES_PER_USER Table
 Let's create a table to count the number of losses for each player.
@@ -253,7 +253,8 @@ GROUP BY
   USER_KEY;
 ----
 
-=== Create the STATS_PER_USER Table
+=== STATS_PER_USER Table
+Let's create a table for listing each player's highest score.
 
 [source,sql]
 ----
